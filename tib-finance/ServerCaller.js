@@ -57,7 +57,7 @@ class ServerCaller {
     }
 
     /**
-     * Gets the service.
+     * Gets the wallet information for a service.
      * @param {string} sessionToken
      * @param {string} serviceId
      * @returns {object}
@@ -241,7 +241,7 @@ class ServerCaller {
     }
 
     /**
-     * Lists the customers.
+     * Adjusts the wallet balance.
      * @param {string} sessionToken
      * @param {string} serviceId
      * @param {string} merchantId
@@ -692,7 +692,7 @@ class ServerCaller {
     }
 
     /**
-     * 
+     *
      * @param {string} sessionToken
      * @param {string} serviceId
      * @returns {object}
@@ -709,7 +709,7 @@ class ServerCaller {
     }
 
     /**
-     * 
+     *
      * @param {string} sessionToken
      * @param {string} recuringTransferId
      * @returns {object}
@@ -989,7 +989,7 @@ class ServerCaller {
     }
 
     /**
-     * 
+     *
      * @param {string} sessionToken
      * @param {string} groupId
      * @param {boolean} stopSameIdentifications
@@ -1008,7 +1008,7 @@ class ServerCaller {
     }
 
     /**
-     * 
+     *
      * @param {string} sessionToken
      * @param {string} transferId
      * @returns {object}
@@ -1025,7 +1025,7 @@ class ServerCaller {
     }
 
     /**
-     * 
+     *
      * @param {string} sessionToken
      * @param {string} interacPaymentMethodId
      * @param {string} interacQuestion
@@ -1048,7 +1048,7 @@ class ServerCaller {
     }
 
     /**
-     * 
+     *
      * @param {string} sessionToken
      * @param {string} serviceId
      * @returns {object}
@@ -1065,7 +1065,7 @@ class ServerCaller {
     }
 
     /**
-     * 
+     *
      * @param {string} sessionToken
      * @param {string} name
      * @param {string} language
@@ -1086,7 +1086,7 @@ class ServerCaller {
     }
 
     /**
-     * 
+     *
      * @param {string} sessionToken
      * @param {string} paymentId
      * @param {string} merchantId
@@ -1105,7 +1105,7 @@ class ServerCaller {
     }
 
     /**
-     * 
+     *
      * @param {string} sessionToken
      * @param {string} transferId
      * @param {string} merchantId
@@ -1124,7 +1124,7 @@ class ServerCaller {
     }
 
     /**
-     * 
+     *
      * @param {string} sessionToken
      * @param {string} merchantId
      * @param {number} amount
@@ -1159,7 +1159,7 @@ class ServerCaller {
     }
 
     /**
-     * 
+     *
      * @param {string} sessionToken
      * @param {string} merchantId
      * @returns {object}
@@ -1176,7 +1176,7 @@ class ServerCaller {
     }
 
     /**
-     * 
+     *
      * @param {string} sessionToken
      * @param {string} merchantId
      * @param {string} supplierName
@@ -1207,7 +1207,7 @@ class ServerCaller {
     }
 
     /**
-     * 
+     *
      * @param {string} sessionToken
      * @param {string} serviceId
      * @param {Date} from
