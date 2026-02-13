@@ -1,0 +1,11 @@
+*.superbackup
+*.realbak
+*.bak
+*.generated
+*.png
+test.html
+test.js
+proxy_server.py
+run_tests.py
+node_modules/
+.env
