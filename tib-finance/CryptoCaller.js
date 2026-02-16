@@ -237,7 +237,7 @@ class CryptoCaller {
    * @param {*} session
    * @returns
    */
-  static preparData(data, serviceId, sessionId) {
+  static prepareData(data, serviceId, sessionId) {
     data.SessionToken = sessionId;
     data.ServiceId = serviceId;
 
@@ -264,12 +264,12 @@ class CryptoCaller {
         CryptoCaller.password
       )
         .then(function (sessionId) {
-          return CryptoCaller.preparData(
+          return CryptoCaller.prepareData(
             data,
             CryptoCaller.serviceId,
             CryptoCaller.sessionId
-          ); /*data.SessionToken = session.SessionId; data.ServiceId = serviceId; return data;*/
-        }) //Crypt the symetric key and the local PublicKey(that the server will use the crypt the return) using the server provided public key.
+          );
+        })
         .then(function (data) {
           return CryptoCaller.performCall(methodName, data);
         })

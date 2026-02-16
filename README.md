@@ -10,15 +10,16 @@ Browser JavaScript SDK for the TIB Finance payment processing API.
 git clone https://github.com/TibFinance/TibJavascriptSdk.git
 ```
 
-Include in your HTML (all three scripts are required):
+Include in your HTML (all four scripts are required):
 
 ```html
+<!-- jQuery 3.x is required for HTTP transport -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
 <script src="tib-finance/security.min.js"></script>
 <script src="tib-finance/CryptoCaller.js"></script>
 <script src="tib-finance/ServerCaller.js"></script>
 ```
-
-> **Note:** Requires jQuery for HTTP transport.
 
 ## Quick Start
 

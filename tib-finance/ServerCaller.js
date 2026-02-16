@@ -57,7 +57,7 @@ class ServerCaller {
     }
 
     /**
-     * Gets the wallet information for a service.
+     * Retrieves wallet information for a specific service.
      * @param {string} sessionToken
      * @param {string} serviceId
      * @returns {object}
@@ -692,7 +692,7 @@ class ServerCaller {
     }
 
     /**
-     *
+     * Retrieves the list of recurring transfers.
      * @param {string} sessionToken
      * @param {string} serviceId
      * @returns {object}
@@ -709,7 +709,7 @@ class ServerCaller {
     }
 
     /**
-     *
+     * Deletes a recurring transfer.
      * @param {string} sessionToken
      * @param {string} recuringTransferId
      * @returns {object}
@@ -989,7 +989,7 @@ class ServerCaller {
     }
 
     /**
-     *
+     * Creates a batch of free operations for processing multiple transactions.
      * @param {string} sessionToken
      * @param {string} groupId
      * @param {boolean} stopSameIdentifications
@@ -1008,7 +1008,7 @@ class ServerCaller {
     }
 
     /**
-     *
+     * Reverts a previously executed transfer.
      * @param {string} sessionToken
      * @param {string} transferId
      * @returns {object}
@@ -1025,7 +1025,7 @@ class ServerCaller {
     }
 
     /**
-     *
+     * Changes the security question and answer for an Interac payment method.
      * @param {string} sessionToken
      * @param {string} interacPaymentMethodId
      * @param {string} interacQuestion
@@ -1048,7 +1048,7 @@ class ServerCaller {
     }
 
     /**
-     *
+     * Initializes the boarding process for a merchant.
      * @param {string} sessionToken
      * @param {string} serviceId
      * @returns {object}
@@ -1065,7 +1065,7 @@ class ServerCaller {
     }
 
     /**
-     *
+     * Creates a new sub-client under the current client account.
      * @param {string} sessionToken
      * @param {string} name
      * @param {string} language
@@ -1086,7 +1086,7 @@ class ServerCaller {
     }
 
     /**
-     *
+     * Resends the payment notification email.
      * @param {string} sessionToken
      * @param {string} paymentId
      * @param {string} merchantId
@@ -1105,7 +1105,7 @@ class ServerCaller {
     }
 
     /**
-     *
+     * Relaunches a failed transfer for a merchant.
      * @param {string} sessionToken
      * @param {string} transferId
      * @param {string} merchantId
@@ -1124,7 +1124,7 @@ class ServerCaller {
     }
 
     /**
-     *
+     * Creates a transfer to a supplier.
      * @param {string} sessionToken
      * @param {string} merchantId
      * @param {number} amount
@@ -1159,7 +1159,7 @@ class ServerCaller {
     }
 
     /**
-     *
+     * Retrieves the list of suppliers associated with a merchant.
      * @param {string} sessionToken
      * @param {string} merchantId
      * @returns {object}
@@ -1176,7 +1176,7 @@ class ServerCaller {
     }
 
     /**
-     *
+     * Creates a new supplier associated with a merchant.
      * @param {string} sessionToken
      * @param {string} merchantId
      * @param {string} supplierName
@@ -1207,7 +1207,7 @@ class ServerCaller {
     }
 
     /**
-     *
+     * Retrieves wallet operations and transaction history for a specified service within a date range.
      * @param {string} sessionToken
      * @param {string} serviceId
      * @param {Date} from
