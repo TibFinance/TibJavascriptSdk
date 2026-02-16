@@ -24,11 +24,19 @@ Include in your HTML (all four scripts are required):
 ## Quick Start
 
 ```javascript
-CryptoCaller.initialize("https://sandboxportal.tib.finance");
+// Initialize with your credentials
+CryptoCaller.initialize(
+    "https://sandboxportal.tib.finance",
+    "your_service_id",
+    "your_client_id",
+    "your_username",
+    "your_password"
+);
 
+// Create a session
 ServerCaller.createSession("your_client_id", "your_username", "your_password")
   .then(response => {
-    console.log(response.SessionId);
+    console.log("Session created:", response);
   });
 ```
 

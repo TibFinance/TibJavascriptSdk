@@ -95,7 +95,7 @@ class ServerCaller {
     }
 
     /**
-     * Lists the merchants with boarding.
+     * Gets the boarding status for a service.
      * @param {string} sessionToken
      * @param {string} boardingServiceId
      * @returns {object}
@@ -640,7 +640,7 @@ class ServerCaller {
     }
 
     /**
-     * Lists the transfers.
+     * Lists the transfers using an optimized fast query.
      * @param {string} sessionToken
      * @param {Date} fromDate
      * @param {Date} toDate
@@ -673,7 +673,7 @@ class ServerCaller {
     }
 
     /**
-     * Lists the transfers of a bill.
+     * Lists the transfers for a specific bill using an optimized fast query.
      * @param {string} sessionToken
      * @param {string} merchantId
      * @param {string} billId
@@ -991,15 +991,17 @@ class ServerCaller {
     /**
      * Creates a batch of free operations for processing multiple transactions.
      * @param {string} sessionToken
+     * @param {Array} freeOperationBatchList
      * @param {string} groupId
      * @param {boolean} stopSameIdentifications
      * @returns {object}
      */
-    static createFreeOperationBatch(sessionToken, groupId, stopSameIdentifications) {
+    static createFreeOperationBatch(sessionToken, freeOperationBatchList, groupId, stopSameIdentifications) {
         var methodName = "/Data/CreateFreeOperationBatch";
 
         var data = {
             "SessionToken": sessionToken,
+            "FreeOperationBatchList": freeOperationBatchList,
             "GroupId": groupId,
             "StopSameIdentifications": stopSameIdentifications,
         };

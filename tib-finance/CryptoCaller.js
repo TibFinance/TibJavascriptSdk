@@ -52,7 +52,7 @@ class CryptoCaller {
       });
     } else {
       return new Promise(function (resolve, reject) {
-        resolve(CryptoCaller.SessionId);
+        resolve(CryptoCaller.sessionId);
       });
     }
   }
@@ -63,8 +63,6 @@ class CryptoCaller {
    * @returns
    */
   static getPublicKey() {
-    let headers = new Headers();
-
     return $.ajax({
       url: CryptoCaller.serverURL + "/data/GetPublicKey",
       method: "POST",
@@ -155,7 +153,7 @@ class CryptoCaller {
             iv: CryptoCaller.randomArray(16, 255),
           });
         },
-        Error: reject,
+        error: reject,
       });
     });
   }
@@ -199,10 +197,10 @@ class CryptoCaller {
   }
 
   /**
-   * Execute a call to the TIB FINANCE API
+   * Encrypts data and executes a call to the TIB FINANCE API
    *
    * @param {*} url - The method name to call on TIB FINANCE (e.g., '/Data/ListCustomers')
-   * @param {*} cryptedData - The encrypted data to send to TIB FINANCE
+   * @param {*} data - The plaintext data to encrypt and send to TIB FINANCE
    * @returns
    */
   static performCall(url, data) {
@@ -250,10 +248,6 @@ class CryptoCaller {
    *
    * @param {*} methodName
    * @param {*} data
-   * @param {*} serviceId
-   * @param {*} clientId
-   * @param {*} userName
-   * @param {*} password
    * @returns
    */
   static callTibFinance(methodName, data) {
