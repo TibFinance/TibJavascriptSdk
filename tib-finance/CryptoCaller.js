@@ -66,7 +66,6 @@ class CryptoCaller {
     return $.ajax({
       url: CryptoCaller.serverURL + "/data/GetPublicKey",
       method: "POST",
-      headers: { "Access-Control-Allow-Origin": "*" },
     });
   }
 
