@@ -455,12 +455,11 @@ class ServerCaller {
      * @param {string} customerId
      * @param {boolean} isCustomerAutomaticPaymentMethod
      * @param {CreditCardModel} creditCard
-     * @param {string} cardOwner
      * @param {string} zipCode
      * @param {string} language
      * @returns {object}
      */
-    static createCreditCardPaymentMethod(sessionToken, currency, customerId, isCustomerAutomaticPaymentMethod, creditCard, cardOwner, zipCode, language) {
+    static createCreditCardPaymentMethod(sessionToken, currency, customerId, isCustomerAutomaticPaymentMethod, creditCard, zipCode, language) {
         var methodName = "/Data/CreateCreditCardPaymentMethod";
 
         var data = {
@@ -469,7 +468,6 @@ class ServerCaller {
             "CustomerId": customerId,
             "IsCustomerAutomaticPaymentMethod": isCustomerAutomaticPaymentMethod,
             "CreditCard": creditCard,
-            "CardOwner": cardOwner,
             "ZipCode": zipCode,
             "Language": language,
         };
