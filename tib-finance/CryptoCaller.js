@@ -15,6 +15,11 @@ class CryptoCaller {
   static userName;
   static password;
 
+  // GetLoginAccessList and Login take the user's credentials instead of a session (routes in lower case).
+  static SIGN_IN_METHODS = Object.freeze(["/data/getloginaccesslist", "/data/login"]);
+  // The SessionId of the last successful Login; used when the sessionId cookie is missing.
+  static loginSessionId = "";
+
   static initialize(serverURL, serviceId, clientId, userName, password) {
     CryptoCaller.serverURL = serverURL;
     CryptoCaller.serviceId = serviceId;
@@ -24,9 +29,12 @@ class CryptoCaller {
   }
 
   static createSession() {
-    CryptoCaller.sessionId = CryptoCaller.getCookie("sessionId");
+    CryptoCaller.sessionId = CryptoCaller.getCookie("sessionId") || CryptoCaller.loginSessionId;
 
     if (CryptoCaller.sessionId === null || CryptoCaller.sessionId == "") {
+      if (!CryptoCaller.clientId || !CryptoCaller.userName || !CryptoCaller.password) {
+        return Promise.reject("No session: call ServerCaller.login() first, or pass the credentials to CryptoCaller.initialize().");
+      }
       var methodName = "/data/CreateSession";
       var loginInfo = {
         ClientId: CryptoCaller.clientId,
@@ -41,8 +49,11 @@ class CryptoCaller {
               reject(data.Messages);
             } else {
               resolve(data);
-              CryptoCaller.setCookie("sessionId", data.SessionId, 1);
-              CryptoCaller.sessionId = data.SessionId;
+              // A Login that succeeded while this call was in flight keeps its session.
+              if (!CryptoCaller.loginSessionId) {
+                CryptoCaller.setCookie("sessionId", data.SessionId, 1);
+                CryptoCaller.sessionId = data.SessionId;
+              }
               return CryptoCaller.sessionId;
             }
           })
@@ -55,6 +66,21 @@ class CryptoCaller {
         resolve(CryptoCaller.sessionId);
       });
     }
+  }
+
+  /**
+   * Sign out: forget the session of this page.
+   * After login(), the session lives in memory until the page reloads, even if
+   * the sessionId cookie is deleted; call clearSession() to sign out.
+   * The next call then opens a session with the credentials given to
+   * initialize(), or is rejected without a request if there are none.
+   * The session is not closed on the server; it expires there on its own.
+   */
+  static clearSession() {
+    // A negative number of days gives an expiry in the past, which deletes the cookie.
+    CryptoCaller.setCookie("sessionId", "", -1);
+    CryptoCaller.sessionId = "";
+    CryptoCaller.loginSessionId = "";
   }
 
   /**
@@ -244,12 +270,26 @@ class CryptoCaller {
   /**
    * Call the TIB FINANCE API
    * This method is the entry point to the SDK. It should be used by the project integrating the SDK
+   * GetLoginAccessList and Login are sent without a session; a successful Login
+   * becomes the session of every later call.
    *
    * @param {*} methodName
    * @param {*} data
    * @returns
    */
   static callTibFinance(methodName, data) {
+    var route = String(methodName).toLowerCase();
+    if (CryptoCaller.SIGN_IN_METHODS.includes(route)) {
+      return CryptoCaller.performCall(methodName, data).then(function (result) {
+        if (route === "/data/login" && result && !result.HasError) {
+          CryptoCaller.sessionId = result.SessionId;
+          CryptoCaller.loginSessionId = result.SessionId;
+          CryptoCaller.setCookie("sessionId", result.SessionId, 1);
+        }
+        return result;
+      });
+    }
+
     return new Promise(function (resolve, reject) {
       CryptoCaller.createSession(
         CryptoCaller.clientId,
@@ -457,10 +497,12 @@ class CryptoCaller {
     var expires = "";
     if (days) {
       var date = new Date();
-      var time = days * 24 * 60 * 60 * 1000;
+      // Capped at 8 hours, the platform's default maximum session lifetime.
+      var time = Math.min(days * 24, 8) * 60 * 60 * 1000;
       date.setTime(date.getTime() + time);
       expires = "; expires=" + date.toUTCString();
     }
-    document.cookie = name + "=" + (value || "") + expires + "; path=/";
+    var secure = typeof location !== "undefined" && location.protocol === "https:" ? "; Secure" : "";
+    document.cookie = name + "=" + (value || "") + expires + "; path=/; SameSite=Strict" + secure;
   }
 }
